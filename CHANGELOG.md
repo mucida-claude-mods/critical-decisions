@@ -4,8 +4,8 @@ All notable changes to this mod. Versions follow [Semantic Versioning](https://s
 
 ## [Unreleased]
 
-### Known issues
-- Widening the scope is recorded as "know" instead of "undo" ([#7](https://github.com/Mucida/critical-decisions/issues/7)).
+### Fixed
+- Widening the scope beyond the request, or changing access, permissions or security, is always recorded as "undo" (red), never "know"; when torn, the agent picks "undo" ([#7](https://github.com/Mucida/critical-decisions/issues/7)).
 
 ## [0.3.3] - 2026-10-20
 

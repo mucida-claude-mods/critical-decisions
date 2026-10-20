@@ -146,6 +146,7 @@ const DEFAULT_CRITERIA = [
   "Not critical: naming, wording and formatting, refactors that keep behaviour, steps that follow directly from the request, and choices that follow the project's conventions.",
   'Group related choices into one record. Judge what matters with what you know of this project, its instructions included.',
   'level "undo" when the user may well want it taken back (it changes scope, a rule or the result, or is hard to undo); "know" when it is a reasonable choice they should just be aware of.',
+  'Always "undo", never "know": widening the scope beyond what was asked (more files, tables, records, users or cases than the request or report named), and any change to access, permissions, roles or security. When torn between the two, pick "undo".',
 ].join('\n')
 
 export function systemSection(c: Config | undefined, learned: Learned[] = []): string {
@@ -252,7 +253,7 @@ export const register: Register = on => {
             type: 'string',
             enum: ['undo', 'know'],
             description:
-              '"undo" when the user may well want it taken back (it changes scope, a rule or the result, or is hard to undo); "know" when it is a reasonable choice they should be aware of. Default "know".',
+              '"undo" when the user may well want it taken back (it changes scope, a rule or the result, or is hard to undo); "know" when it is a reasonable choice they should be aware of. Always "undo" when it widens the scope beyond what was asked or changes access, permissions or security. When torn, "undo".',
           },
         },
         required: ['area', 'decision', 'reason'],
