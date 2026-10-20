@@ -3,16 +3,16 @@
 A Claude Code mod that keeps you in the loop when the agent makes a call you never asked for. It works for any kind of project: code, an article, a book, a dataset.
 
 - **The agent decides something on its own** that you did not literally ask for: it calls `record_decision` with the decision, the reason and the alternative it ruled out.
-- **Recorded decisions** show in a band above the prompt: red for what you may want to take back, yellow for what is worth knowing. The band stays until you dismiss it, across turns, so a decision does not scroll away unseen.
-- **Each decision has two buttons:** **rethink** sends it back to the agent ("undo it if you can, propose other ways, ask me first"); **not critical** takes it off and teaches the agent not to record its like again.
+- **Recorded decisions** show in a band above the prompt: red for big calls to review (you may agree or take them back), yellow for what is worth knowing. The band stays until you dismiss it, across turns, so a decision does not scroll away unseen.
+- **Each decision, red or yellow, has three buttons:** **ok** takes only that row off (you agree, nothing is learned); **rethink** sends it back to the agent ("undo it if you can, propose other ways, ask me first"); **not critical** takes it off and teaches the agent not to record its like again.
 - **Something you marked as critical is touched** (a file, a term, a command): you get a toast, and the agent is reminded to declare whether it was its own decision.
 
 ```
-⚠️ Critical decisions: 1 to rethink · 1 to know  [ok]  (or /critical-ok)
+⚠️ Critical decisions: 1 to review · 1 to know  [ok]  (or /critical-ok)
   [14:40] I made orders.status nullable; it was required before. — old rows have no status     ← red
-     [rethink] [not critical]  (migrations)
+     [ok] [rethink] [not critical]  (migrations)
   [14:32] I rounded tax to 2 decimals, which you had not specified. — the invoice shows 2     ← yellow
-     [rethink] [not critical]  (pricing)
+     [ok] [rethink] [not critical]  (pricing)
 ```
 
 ## Install
@@ -48,9 +48,9 @@ Naming, wording, formatting, refactors that keep behaviour, steps that follow st
 For example, you ask for a paragraph on wind power and the agent brings in solar panels as a comparison:
 
 ```
-⚠️ Critical decisions: 1 to rethink  [ok]  (or /critical-ok)
+⚠️ Critical decisions: 1 to review  [ok]  (or /critical-ok)
   [10:05] I added a comparison with solar panels; you asked only about wind power. — it gives a reference point
-     [rethink] [not critical]  (general)
+     [ok] [rethink] [not critical]  (general)
 ```
 
 If it records something you do not care about, press **not critical**. The mod keeps the last 10 such records per project and shows them to the agent as examples of what not to record.

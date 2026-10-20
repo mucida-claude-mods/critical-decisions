@@ -323,7 +323,7 @@ const decideAt = ($: any, decision: string, level?: string) =>
 const rowsOf = async (ui: any) =>
   (await ui.findAll({ type: 'Text' })).map((x: any) => x.text).filter((t: string) => /^\s*\[\d\d:\d\d\]/.test(t))
 
-test('levels: red "to rethink" rows come first, then yellow "to know", newest first; header counts both', async ($, on) => {
+test('levels: red "to review" rows come first, then yellow "to know", newest first; header counts both', async ($, on) => {
   base(on)
   await start($)
   await decideAt($, 'k1')
@@ -332,13 +332,13 @@ test('levels: red "to rethink" rows come first, then yellow "to know", newest fi
   await decideAt($, 'u2', 'undo')
   const ui = await band($)
   const t = await texts(ui)
-  expect(t.includes('2 to rethink · 2 to know'), t).toBe(true)
+  expect(t.includes('2 to review · 2 to know'), t).toBe(true)
   const rows = await rowsOf(ui)
   expect(rows.length, 'three rows').toBe(3)
   expect(rows[0].includes('u2') && rows[1].includes('u1') && rows[2].includes('k2'), rows.join('|')).toBe(true)
   const red = await ui.findAll({ type: 'Text', color: 'red' })
   expect(red.some((x: any) => x.text.includes('u2')), 'undo is red').toBe(true)
-  expect((await cmd($, 'critical-list')).text.includes('to rethink (pricing) u1'), 'list shows the level').toBe(true)
+  expect((await cmd($, 'critical-list')).text.includes('to review (pricing) u1'), 'list shows the level').toBe(true)
 })
 
 test('an unknown or missing level is "know"', async ($, on) => {
@@ -346,6 +346,20 @@ test('an unknown or missing level is "know"', async ($, on) => {
   await start($)
   await decideAt($, 'x', 'whatever')
   expect((await texts(await band($))).includes('1 to know'), await texts(await band($))).toBe(true)
+})
+
+test('a row\'s ok takes only that row off and teaches nothing', async ($, on) => {
+  base(on)
+  await start($)
+  await decideAt($, 'Widened to every table', 'undo')
+  await decideAt($, 'Kept it short')
+  const ui = await band($)
+  await ui.press({ key: 'ok-1' })
+  const rows = await rowsOf(await band($))
+  expect(rows.length === 1 && rows[0].includes('Kept it short'), rows.join('|')).toBe(true)
+  expect(g.submitted.length).toBe(0)
+  const s = (await $.prompt.compose(COMPOSE)).sections.find((s: any) => s.id === 'critical-decisions:rules') as any
+  expect(s.text.includes('Widened'), s.text).toBe(false)
 })
 
 test('rethink sends the decision back to the agent as the person and takes the row off', async ($, on) => {

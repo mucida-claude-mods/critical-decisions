@@ -4,6 +4,12 @@ All notable changes to this mod. Versions follow [Semantic Versioning](https://s
 
 ## [Unreleased]
 
+### Added
+- Each row, red or yellow, has its own **ok**: it takes only that row off and teaches nothing, for a critical call you agree with ([#8](https://github.com/Mucida/critical-decisions/issues/8)).
+
+### Changed
+- Red reads "to review" instead of "to rethink": a big call to look at, which may well be right ([#8](https://github.com/Mucida/critical-decisions/issues/8)).
+
 ### Fixed
 - Widening the scope beyond the request, or changing access, permissions or security, is always recorded as "undo" (red), never "know"; when torn, the agent picks "undo" ([#7](https://github.com/Mucida/critical-decisions/issues/7)).
 

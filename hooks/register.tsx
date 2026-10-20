@@ -8,7 +8,7 @@ const SAVE_TOOL = `mcp__${PLUGIN}__save_critical_areas`
 // the areas, keywords and paths extracted from them.
 export type Area = { name: string; keywords: string[]; paths: string[] }
 export type Config = { description: string; areas: Area[] }
-// undo: the person may want to take it back (red). know: worth knowing (yellow).
+// undo: big enough to review; the person may agree or take it back (red). know: worth knowing (yellow).
 export type Level = 'undo' | 'know'
 type Decision = { id: number; time: string; level: Level; area: string; decision: string; reason: string; alternative: string }
 // Records the person marked as not critical: shown to the agent so it stops recording their like.
@@ -178,7 +178,7 @@ function reminder(areas: string[], tool: string): string {
   return `[${PLUGIN}] You touched what the user marked as critical (${areas.join(', ')}). If this was your own decision, not something the user literally asked for, call ${tool} with the decision, the reason and the alternative you ruled out, and say so in your reply. If it was asked for literally, carry on without recording.`
 }
 
-const LEVEL_LABEL: Record<Level, string> = { undo: 'to rethink', know: 'to know' }
+const LEVEL_LABEL: Record<Level, string> = { undo: 'to review', know: 'to know' }
 
 function report(list: Decision[]): string {
   if (!list.length) return 'No critical decisions recorded in this session.'
@@ -394,6 +394,8 @@ export const register: Register = on => {
             </Text>
             <Box>
             <Text>{'     '}</Text>
+            <Button key={`ok-${d.id}`} label="ok" role="dismiss" onPress={() => drop(d.id)} />
+            <Text> </Text>
             <Button
               key={`rethink-${d.id}`}
               label="rethink"
