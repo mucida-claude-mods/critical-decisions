@@ -20,16 +20,16 @@ A Claude Code mod that keeps you in the loop when the agent makes a call you nev
 At the prompt of a Claude Code terminal session:
 
 ```
-/plugin install critical-decisions --marketplace Mucida/critical-decisions
+/plugin install critical-decisions --marketplace mucida-claude-mods/critical-decisions
 ```
 
 From a shell:
 
 ```sh
-claude plugin install critical-decisions --marketplace Mucida/critical-decisions
+claude plugin install critical-decisions --marketplace mucida-claude-mods/critical-decisions
 ```
 
-In the desktop app: click **+** next to the prompt box, then **Plugins**, **Add marketplace** with `Mucida/critical-decisions`, then **Add plugin**.
+In the desktop app: click **+** next to the prompt box, then **Plugins**, **Add marketplace** with `mucida-claude-mods/critical-decisions`, then **Add plugin**.
 
 ## Default protection
 
@@ -129,7 +129,21 @@ claude plugin test .
 
 ## Changelog
 
-See [CHANGELOG.md](CHANGELOG.md). Bugs and ideas: [issues](https://github.com/Mucida/critical-decisions/issues).
+See [CHANGELOG.md](CHANGELOG.md). Bugs and ideas: [issues](https://github.com/mucida-claude-mods/critical-decisions/issues).
+
+## More mods by the same author / Mais mods do mesmo autor
+
+All in one place: **[github.com/mucida-claude-mods](https://github.com/mucida-claude-mods)**
+
+| Mod | What it does |
+| --- | --- |
+| [warm-me](https://github.com/mucida-claude-mods/warm-me) | Pixel-art fire showing whether the prompt cache is still warm |
+| [critical-decisions](https://github.com/mucida-claude-mods/critical-decisions) | Shows the critical decisions the agent made without asking |
+| [indicador-de-contexto](https://github.com/mucida-claude-mods/indicador-de-contexto) | Warns when to split or compact the chat (250k / 400k) |
+| [novo-chat-ou-aqui](https://github.com/mucida-claude-mods/novo-chat-ou-aqui) | Should this extra step run here or in a new chat? |
+| [pendencias](https://github.com/mucida-claude-mods/pendencias) | Chats that ended waiting on you |
+| [telinha-mcp](https://github.com/mucida-claude-mods/telinha-mcp) | Which MCP the agent just called, in plain words |
+| [faixa-de-terreno](https://github.com/mucida-claude-mods/faixa-de-terreno) | Branch, issue, dirty files and commits ahead of main |
 
 ## License
 
